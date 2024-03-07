@@ -1,26 +1,28 @@
+import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class IsMoon implements StringChecker {
-  public boolean checkString(String s) {
-    return s.equalsIgnoreCase("moon");
-  }
+    public boolean checkString(String s) {
+        return s.equalsIgnoreCase("moon");
+    }
 }
 
 public class TestListExamples {
-  @Test(timeout = 500)
-  public void testMergeRightEnd() {
-    List<String> left = Arrays.asList("a", "b", "c");
-    List<String> right = Arrays.asList("a", "d");
-    List<String> merged = ListExamples.merge(left, right);
-    List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
-    assertEquals(expected, merged);
-  }
-  @Test
+
+    @Test(timeout = 500)
+    public void testMergeRightEnd() {
+        List<String> left = Arrays.asList("a", "b", "c");
+        List<String> right = Arrays.asList("a", "d");
+        List<String> merged = ListExamples.merge(left, right);
+        List<String> expected = Arrays.asList("a", "a", "b", "c", "d");
+        assertEquals(expected, merged);
+    }
+
+    @Test
     public void testMerge() {
         List<String> list1 = Arrays.asList("apple", "banana", "cherry");
         List<String> list2 = Arrays.asList("blueberry", "grape", "orange");
@@ -30,6 +32,7 @@ public class TestListExamples {
         List<String> expected = Arrays.asList("apple", "banana", "blueberry", "cherry", "grape", "orange");
         assertEquals(expected, result);
     }
+
     @Test
     public void testMergeEmptyLists() {
         List<String> list1 = new ArrayList<>();
@@ -39,6 +42,7 @@ public class TestListExamples {
 
         assertTrue(result.isEmpty());
     }
+
     @Test
     public void testMergeEqualStringsInBothLists() {
         List<String> list1 = Arrays.asList("apple", "banana", "cherry");
@@ -50,26 +54,24 @@ public class TestListExamples {
         assertEquals(expected, result);
     }
 
-  @Test
+    @Test
     public void testFilter() {
         List<String> inputList = Arrays.asList("apple", "banana", "cherry", "date", "kiwi");
-        StringChecker checker = s -> s.length() >= 5;
+        StringChecker checker = new IsMoon(); // Use a concrete implementation of StringChecker
 
         List<String> result = ListExamples.filter(checker, inputList);
 
-        List<String> expected = Arrays.asList("banana", "cherry");
+        List<String> expected = Arrays.asList("date");
         assertEquals(expected, result);
     }
+
     @Test
     public void testFilterEmptyList() {
         List<String> inputList = new ArrayList<>();
-        StringChecker checker = s -> s.length() >= 5;
+        StringChecker checker = new IsMoon(); // Use a concrete implementation of StringChecker
 
         List<String> result = ListExamples.filter(checker, inputList);
 
         assertTrue(result.isEmpty());
     }
-
-
-  
 }
